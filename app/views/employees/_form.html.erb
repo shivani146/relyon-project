@@ -1,0 +1,57 @@
+<%= simple_form_for(@employee,:class => "pure-form") do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <label>EmployeeId</label>
+        <%= f.input :employeeid,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>Name</label>
+        <%= f.input :name,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>MobileNo</label>
+        <%= f.input :mobileno,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>Address</label>
+        <%= f.input :address,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>Gender</label>
+        <%= f.input :gender, collection: %w(Male Female), label:false, required: true,:prompt => "Select Gender" %>
+      </div>
+      <div class="column">
+        <label>Email</label>
+        <%= f.input :email,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>Password</label>
+        <%= f.input :password,label: false,required: true %>
+      </div>
+      <div class="column">
+        <label>Password Confirmation</label>
+        <%= f.input :password_confirmation,label: false,required: true %>
+      </div>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.button :submit %>
+    </div>
+    <div class="column">
+      <%= link_to 'Back', employees_path %>
+    </div>
+    
+  </div>
+  
+<% end %>

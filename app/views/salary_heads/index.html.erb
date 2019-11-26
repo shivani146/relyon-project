@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Salary Heads</h1>
+
+<table id="customers">
+  <thead>
+    <tr>
+      <th>Head Name</th>
+      <th>Type</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salary_heads.each do |salary_head| %>
+      <tr>
+        <td><%= salary_head.salaryname %></td>
+        <td><%=  salary_head.earnings == true  ? 'Earnings' : 'Deduction' %></td>
+        <td><%= link_to 'Edit', edit_salary_head_path(salary_head) %>
+        <%= link_to 'Destroy', salary_head, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salary head', new_salary_head_path %>

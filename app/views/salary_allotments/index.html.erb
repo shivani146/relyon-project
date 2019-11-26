@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="text-align: center">Listing Employees for Salary Allotment</h1>
+
+<table id="customers">
+  <thead>
+  <tr>
+    <th>Employeeid</th>
+    <th>Name</th>
+    <th>Mobile No</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @employees.each do |employee| %>
+    <tr>
+      <td><%= employee.employeeid %></td>
+      <td><%= employee.name %></td>
+      <td><%= employee.mobileno %></td>
+
+      <td>
+        <% if current_employee && [Constant.employee_roles[:admin]].include?(current_employee.role) %>
+          <%= link_to 'Salary Allotment', {:controller => "salary_allotments", :action => "new", :id => employee.id } %>
+        <% end %>
+
+        <%= link_to 'My Salary', {:controller => "salary_allotments", :action => "my_salary", :id => employee.id } %>
+        <%= link_to 'Create PDF', {:controller => "salary_allotments", :action => "calculated_salary", :id => employee.id, format: :pdf },  target: '_blank', title: 'Click to Export as PDF', class: 'btn btn-default' %>
+
+        <%= link_to 'Download PDF', {:controller => "salary_allotments", :action => "calculated_salary", :id => employee.id, format: :pdf },download: "",  target: '_blank', title: 'Click to Export as PDF', class: 'btn btn-default' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>

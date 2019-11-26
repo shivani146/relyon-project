@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="text-align: center">Employees List</h1>
+
+<table id="customers">
+  <thead>
+    <tr>
+      <th>Employeeid</th>
+      <th>Name</th>
+      <th>Mobile No</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.employeeid %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.mobileno %></td>
+        <td><%= employee.gender %></td>
+        <td><%= employee.address %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %>
+          <% if current_employee && [Constant.employee_roles[:admin]].include?(current_employee.role) %>
+            <%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_employee && [Constant.employee_roles[:admin]].include?(current_employee.role) %>
+  <%= link_to 'New Employee', new_employee_path %>
+<% end %>

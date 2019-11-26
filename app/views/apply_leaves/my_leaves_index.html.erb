@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+<% if @all_leaves.present? %>
+  <h1 style="text-align: center">Listing Apply Leaves</h1>
+  <div class="row">
+    <div class="column">
+      <label><b>EmployeeId:</b></label>
+      <%= @leave.employee.employeeid %>
+    </div>
+    <div class="column">
+      <label><b>Name:</b></label>
+      <%= @leave.employee.name %>
+    </div>
+    <div class="column">
+      <label><b>MobileNo:</b></label>
+      <%= @leave.employee.mobileno %>
+    </div>
+    <div class="column">
+      <label><b>Pay Days:</b></label>
+      <%= @leave.payday %>
+    </div>
+    <div class="column">
+      <label><b>Present Days:</b></label>
+      <%= @leave.present_days %>
+    </div>
+    <div class="column">
+      <label><b>Week Off:</b></label>
+      <%= @leave.weekoff %>
+    </div>
+  </div>
+  <table id="customers">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Count</th>
+      <th>Applied Leaves</th>
+      <th>Remaining Leaves</th>
+      <th>Created Date </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @all_leaves.each do |leave| %>
+
+        <td><%= leave.name %></td>
+        <td><%= leave.count %></td>
+        <td><%= leave.applied_leaves %></td>
+        <td><%= leave.remaining_leaves >= 0  ? leave.remaining_leaves : '-'  %></td>
+        <td><%= leave.created_at.strftime("%d/%m/%Y") %></td>
+
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <b> No leaves applied till now </b>
+<% end %>

@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+      <div class="column">
+        <label><b>EmployeeId:</b></label>
+        <%= @employee_details.employeeid %>
+      </div>
+      <div class="column">
+        <label><b>Name:</b></label>
+        <%= @employee_details.name %>
+      </div>
+      <div class="column">
+        <label><b>MobileNo:</b></label>
+        <%= @employee_details.mobileno %>
+      </div>
+  </div>
+  <%= simple_form_for :apply_leave, url: apply_leaves_url, method: 'get', :html => {:class => "form-inline", onsubmit: "return submitapplyleave()"} do |f| %>
+    <div class="row">
+      <div class="column">
+        <%= f.input :employeeid, :as => :hidden, label: false, input_html: {class: "form-control", :value => @employee_details.id }, :placeholder => "Total Count" %>
+        <label>Select Leave Type</label>
+        <%= select_tag :leave_name, options_for_select(ApplyLeavesHelper.get_leave_names), input_html: {class: "form-control"}, onchange: "get_details()", :prompt => "Select Leave Type", :id => "select_leave_name" %>
+      </div>
+      <div class="column">
+        <label>Total Count</label>
+        <%= f.input :count, readonly: true, label: false, input_html: {class: "form-control"}, :placeholder => "Total Count" %>
+      </div>
+      <div class="column">
+        <label>Applied Leave</label>
+        <%= f.input :applied_leave, label: false, input_html: {class: "form-control"}, :placeholder => "Applied Leave" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <%= f.button :submit, id: "submit", class: "btn green" %>
+      </div>
+      <div class="column">
+        <%= link_to 'Back', apply_leaves_url %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
+
+<script>
+    function get_details() {
+        var params = {};
+        params["leave_name"] = $('#select_leave_name').val();
+        $.ajax({
+            url: "/get_leave_details",
+            type: "POST",
+            data: params,
+            success: function (data) {
+                console.log(data);
+                $('#apply_leave_count').val(data['count']);
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+                console.log(error);
+            }
+        });
+
+    }
+    function submitapplyleave()
+    {
+        var params = {};
+        params["leave_name"] = $('#select_leave_name').val();
+        params["count"] = $('#apply_leave_count').val();
+        params["applied_leave"] = $('#apply_leave_applied_leave').val();
+        params["employeeid"] = $('#apply_leave_employeeid').val();
+        $.ajax({
+            url: "/submit_apply_leave",
+            type: "POST",
+            data: params,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, errorThrown) {
+                var errors = $.parseJSON(xhr.responseText).errors;
+                alert(errors);
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+

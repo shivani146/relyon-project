@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pf: 1
+  esi: 1
+  pt: 1
+
+two:
+  pf: 1
+  esi: 1
+  pt: 1

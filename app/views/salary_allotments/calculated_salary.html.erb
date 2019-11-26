@@ -1,0 +1,88 @@
+<style>
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+</style>
+<%= wicked_pdf_stylesheet_link_tag "/form.css" -%>
+<%= wicked_pdf_stylesheet_link_tag "pdf" %>
+<div style="background-color: white!important;">
+  <div style="float: left"><%= wicked_pdf_image_tag('saral.png', height: '100', width: '100') %></div>
+  <div style="float: right"><%= wicked_pdf_image_tag('saral.png', height: '100', width: '100') %></div>
+  <br>
+  <div style="text-align: center; font-size: 25px"><b>Karnataka</b></div>
+  <br>
+  <div style="text-align: center; font-size: 20px"><b>XYZ</b><br></div>
+  <div style="text-align: center; font-size: 20px"><br>
+    <b> Pay Slip for the month of <%= Date.today.strftime("%B") %>-<%= Date.today.year %></b></div>
+  <div class="container" style="padding-top: 5%!important; font-size: 18px; background-color: white!important">
+    <div class="row">
+      <div class="column">
+        <label><b>EmployeeId:</b></label>
+        <%= @employee.employeeid %>
+      </div>
+      <div class="column" style="padding-bottom: 2%">
+        <label><b>Name:</b></label>
+        <%= @employee.name %>
+      </div>
+      <div class="column" style="padding-bottom: 2%">
+        <label><b>MobileNo:</b></label>
+        <%= @employee.mobileno %>
+      </div>
+      <div class="column" style="padding-bottom: 2%">
+        <label><b>Role:</b></label>
+        <%= @employee.role %>
+      </div>
+    </div>
+
+
+    <table id="customers">
+      <thead>
+      <tr>
+        <th style="background-color: white;color: #2E2F30">Earnings</th>
+        <th style="background-color: white;color: #2E2F30">Amount</th>
+        <th style="background-color: white;color: #2E2F30">Deductions</th>
+        <th style="background-color: white;color: #2E2F30" colspan="2">Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @employee.salary.salary_hash.each do |key, value| %>
+        <% salary_head = SalaryHead.find(key.to_i) %>
+        <% if salary_head.earnings == true %>
+          <tr rowspan="2">
+            <td><%= salary_head.salaryname %></td>
+            <td> <%= value %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% else %>
+          <tr rowspan="2">
+            <th colspan="2" style="background-color: white">
+            <td style="background-color: white"><%= salary_head.salaryname %></td>
+            <td style="background-color: white"> <%= value %></td>
+            </th>
+          </tr>
+
+        <% end %>
+      <% end %>
+      <tr>
+        <td style="background-color: white"><b>Total Earnings</b></td>
+        <td style="background-color: white"><%= @employee.salary.total_earning_hash["earning"].to_f.round(2) %></td>
+        <td style="background-color: white"><b>Total Deductions</b></td>
+        <td style="background-color: white"><%= @employee.salary.total_deduction_hash["deduction"].to_f.round(2) %></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <b>Net Salary</b>:<%= @employee.salary.net_salary %><br><br>
+          <b>Net Salary(in words)</b>:<%= @employee.salary.net_salary.to_i.to_words %> only <br><br>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+</div>

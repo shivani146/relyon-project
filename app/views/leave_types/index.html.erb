@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Leave Types</h1>
+
+<table id="customers">
+  <thead>
+  <tr>
+    <th>Leave Type</th>
+    <th>Count</th>
+    <th colspan="2">Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @leave_types.each do |leave_type| %>
+    <tr>
+      <td><%= leave_type.name %></td>
+      <td><%= leave_type.count %></td>
+      <td><%= link_to 'Edit', edit_leave_type_path(leave_type) %>
+      <%= link_to 'Destroy', leave_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Leave type', new_leave_type_path %>

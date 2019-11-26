@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <label><b>EmployeeId:</b></label>
+      <%= @employee_details.employeeid %>
+    </div>
+    <div class="column">
+      <label><b>Name:</b></label>
+      <%= @employee_details.name %>
+    </div>
+    <div class="column">
+      <label><b>MobileNo:</b></label>
+      <%= @employee_details.mobileno %>
+    </div>
+  </div>
+
+  <%= simple_form_for :salary_allotments, url: salary_allotments_url, method: 'get', :html => {:class => "form-inline"} do |f| %>
+    <div class="row">
+      <div class="column">
+        <%= f.input :employee_id, :as => :hidden, label: false, input_html: {class: "form-control", :value => @employee_details.id}, :placeholder => "Total Count" %>
+        <% @salary_heads.each do |salary_head| %>
+          <%= f.input :salary_head_id, :as => :hidden, label: false, input_html: {class: "form-control", :value => salary_head.id} %>
+          <label><b><%= salary_head.salaryname %></b></label>
+          <%= f.input :amount, label: false, input_html: {class: "form-control"}, :placeholder => "Amount" %>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="column">
+      <%= f.button :submit, id: "submit", class: "btn green" %>
+      <%= link_to 'Back', salary_allotment_url %>
+    </div>
+
+    </div>
+  <% end %>
+  </div>

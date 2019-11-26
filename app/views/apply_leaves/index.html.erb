@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="text-align: center">Listing Apply Leaves</h1>
+
+<table id="customers">
+  <thead>
+    <tr>
+      <th>Employeeid</th>
+      <th>Name</th>
+      <th>Mobile No</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.employeeid %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.mobileno %></td>
+
+        <td><%= link_to 'Apply Leave', {:controller => "apply_leaves", :action => "apply_leave_index", :id => employee.id } %>
+        <%= link_to 'My Leaves', {:controller => "apply_leaves", :action => "my_leaves_index", :id => employee.id } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

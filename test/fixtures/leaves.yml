@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cl: 1
+  sl: 1
+  lop: 1
+  payday: 1
+  weekoff: 1
+
+two:
+  cl: 1
+  sl: 1
+  lop: 1
+  payday: 1
+  weekoff: 1

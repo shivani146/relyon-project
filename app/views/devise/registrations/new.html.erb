@@ -1,0 +1,58 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <label>Name</label>
+        <%= f.input :name, label: false, required: true %>
+      </div>
+      <div class="column">
+        <label>MobileNo</label>
+        <%= f.input :mobileno, label: false, required: true %>
+      </div>
+      <div class="column">
+        <label>Address</label>
+        <%= f.input :address, label: false, required: true %>
+      </div>
+      <div class="column">
+        <label>Gender</label>
+        <%= f.input :gender, collection: %w(Male Female), label: false, required: true, :prompt => "Select Gender" %>
+      </div>
+      <div class="column">
+        <label>Email</label>
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    label: false,
+                    input_html: {autocomplete: "email"} %>
+      </div>
+      <div class="column">
+        <label>Password</label>
+        <%= f.input :password,
+                    required: true,
+                    label: false,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: {autocomplete: "new-password"} %>
+      </div>
+      <div class="column">
+        <label>Confirmation Password</label>
+        <%= f.input :password_confirmation,
+                    required: true,
+                    label: false,
+                    input_html: {autocomplete: "new-password"} %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.button :submit, "Sign up" %>
+    </div>
+
+  </div>
+
+<% end %>
+
+<%= render "devise/shared/links" %>

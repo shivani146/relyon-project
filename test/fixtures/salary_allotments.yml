@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  basic: 1
+  da: 1
+  hra: 1
+  convenyance: 1
+  meal_allowance: 1
+  special_allowance: 1
+
+two:
+  basic: 1
+  da: 1
+  hra: 1
+  convenyance: 1
+  meal_allowance: 1
+  special_allowance: 1

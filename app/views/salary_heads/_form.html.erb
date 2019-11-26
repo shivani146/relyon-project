@@ -1,0 +1,34 @@
+<%= simple_form_for(@salary_head) do |f| %>
+  <% if @salary_head.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@salary_head.errors.count, "error") %> prohibited this leave type from being saved:</h2>
+
+      <% @salary_head.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+
+    </div>
+  <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <label>Head Name</label>
+        <%= f.input :salaryname,  label:false, required: true,:prompt => "Select Leave Type" %>
+      </div>
+      <div class="column">
+        <label>Select the values</label>
+        <%= f.input :earnings, as: :boolean, checked_value: true, unchecked_value: false %>
+        <%= f.input :deduction, as: :boolean, checked_value: true, unchecked_value: false %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <%= f.button :submit %>
+    </div>
+    <div class="column">
+      <%= link_to 'Back', leave_types_path %>
+    </div>
+
+  </div>
+<% end %>

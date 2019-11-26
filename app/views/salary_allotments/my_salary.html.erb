@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<% if @salary_allotment.present? %>
+  <h1 style="text-align: center">Listing Salary Allotment</h1>
+  <div class="row">
+    <div class="column">
+      <label><b>EmployeeId:</b></label>
+      <%= @salary_allotment.employee_id %>
+    </div>
+    <div class="column">
+      <label><b>Name:</b></label>
+      <%= @salary_allotment.employee.name %>
+    </div>
+    <div class="column">
+      <label><b>MobileNo:</b></label>
+      <%= @salary_allotment.employee.mobileno %>
+    </div>
+  </div>
+  <table id="customers">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Salary</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <% @salary_allotment.salary_head_hash.each do |key,value| %>
+    <tr>
+      <td><%= SalaryHead.find(key.to_i).salaryname %></td>
+      <td><%= value %><tr>
+    </tr>
+    <% end %>
+
+
+    </tbody>
+  </table>
+<% else %>
+  <b> No salary allotment till now </b>
+<% end %>
+</table>
+
+<br>
